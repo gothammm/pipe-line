@@ -38,7 +38,9 @@ describe('Pipeline cases', () => {
     
     pipe.register((input, next) => {
       return next(input);
-    }, 'return value');
+    }, {
+      name: 'return value'
+    });
     
     let tasks = pipe.getTasks();
     
