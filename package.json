@@ -1,6 +1,6 @@
 {
   "name": "pipe-line",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Pipelines to divide large tasks to, sequence of smaller and independent tasks.",
   "main": "index.js",
   "scripts": {
@@ -28,6 +28,7 @@
   "homepage": "https://github.com/peek4y/pipe-line#readme",
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "superagent": "^1.7.2"
   }
 }
