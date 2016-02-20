@@ -1,0 +1,33 @@
+{
+  "name": "pipe-line",
+  "version": "1.0.0",
+  "description": "Pipelines to divide large tasks to, sequence of smaller and independent tasks.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/peek4y/pipe-line.git"
+  },
+  "keywords": [
+    "pipeline",
+    "pipe",
+    "channels",
+    "pipe-line",
+    "tasks"
+  ],
+  "author": "Gautham Ramachandran <gautham2r@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/peek4y/pipe-line/issues"
+  },
+  "engines": {
+    "node": ">=4.0"
+  },
+  "homepage": "https://github.com/peek4y/pipe-line#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  }
+}
