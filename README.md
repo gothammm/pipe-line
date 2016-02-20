@@ -10,7 +10,7 @@ A task assembler, to divide large tasks into independent and testable small task
 
   Install Pipe-line.
     
-    ``` npm install --save pipe-line ```
+    npm install --save pipe-line
     
   Registering and executing tasks with pipeline.
   
