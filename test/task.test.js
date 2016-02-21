@@ -11,7 +11,7 @@ const expect = Chai.expect;
 
 describe('Task cases', () => {
   it('should execute a single task', (done) => {
-    let pipe = new Pipeline('myPipe', null);
+    let pipe = new Pipeline('myPipe');
     
     let addTwo = (input, next) => next(input + 2);
     
@@ -29,7 +29,7 @@ describe('Task cases', () => {
   });
   
   it('should handle asynchronous task', (done) => {
-    let pipe = new Pipeline('myAsyncPipe', null);
+    let pipe = new Pipeline('myAsyncPipe');
     
     pipe.register((input, next) => {
       let githubUserUrl = 'https://api.github.com/users';
@@ -52,7 +52,7 @@ describe('Task cases', () => {
     // Increase timeout.
     this.timeout(10000);
     
-    let pipe = new Pipeline('myGithubPipe', null);
+    let pipe = new Pipeline('myGithubPipe');
     let githubUserApi = 'https://api.github.com/users';
     let getUser = (input, next) => request.get(`${githubUserApi}/${input}`).end((err, res) => {
       if (err) {
@@ -81,5 +81,33 @@ describe('Task cases', () => {
       expect(result).to.have.length.of.at.least(1);
       return done();
     }).catch(done);
+  });
+  
+  it('should handle logs', (done) => {
+    
+    let pipe = new Pipeline('myPipe');
+    let expectLogs = [];
+    
+    pipe.on('log', (message, taskName) => {
+      expectLogs.push(message);
+      console.log('Logged -', message, taskName);
+      if (expectLogs.length >= 2) {
+        return done();
+      }
+    });
+    
+    pipe.register(function addOne(input, next) {
+      let _self = this;
+      _self.log('Some message');
+      return next(input + 1);
+    });
+    
+    pipe.register(function addTwo(input, next) {
+      let _self = this;
+      _self.log('Some message 2');
+      return next(input + 2);
+    });
+    
+    pipe.execute(10);
   });
 });

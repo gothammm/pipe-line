@@ -10,7 +10,7 @@ const expect = Chai.expect;
 
 describe('Pipeline cases', () => {
   it('should create instance of Pipeline', (done) => {
-    let pipe = new Pipeline('myPipe', null);
+    let pipe = new Pipeline('myPipe');
 
     expect(pipe.name).to.equal('myPipe');
     expect(pipe).to.be.instanceOf(Pipeline);
@@ -19,7 +19,7 @@ describe('Pipeline cases', () => {
   });
 
   it('should register tasks', (done) => {
-    let pipe = new Pipeline('myPipe', null);
+    let pipe = new Pipeline('myPipe');
     
     pipe.register((input, next) => {
       return next(input);
@@ -34,7 +34,7 @@ describe('Pipeline cases', () => {
   });
   
   it('should regsiter task with a name', (done) => {
-    let pipe = new Pipeline('myPipe', null);
+    let pipe = new Pipeline('myPipe');
     
     pipe.register((input, next) => {
       return next(input);
