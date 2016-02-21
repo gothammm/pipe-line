@@ -2,9 +2,6 @@
 
 A task assembler, to divide large tasks into independent and testable small task, and pipe them!
 
-## TODO
-  - Logger control for each task.
-  - Better metrics on each task.
 
 ## Usage
 
