@@ -35,6 +35,47 @@ A task assembler, to divide large tasks into independent and testable small task
     }, 2000);
   });
   
+  // Use ES5 function, to get a hold of the current task scope.
+  // 'this' scope will be unavailable when using ES6 arrow function.
+  pipe.register(function(input, next) {
+    let _self = this; // Task Scope. 
+    
+    _self.log('My Log message', 'and more message'); // Triggers the event 'log'
+  });
+  
+  // Handling events
+  
+  // Error event.
+  // params -> err, and name of the task it failed.
+  pipe.on('error', (err, taskName) => {
+    // Handle stuff
+  });
+  
+  // Log event.
+  pipe.on('log', (message, taskName) => {
+    myLogger.info(message, taskName);
+  });
+  
+  
+  // Task start event.
+  // Triggers when a task starts.
+  pipe.on('task-start', (taskName) => {
+    myLogger.info(`${taskName} started...`);
+  });
+  
+  // Task Complete event.
+  // Triggers when a particular task finished executing.
+  // params -> taskName and ElapsedTime - Time elapsed for the task.
+  pipe.on('task-complete', (taskName, elapsedTime) => {
+    myLogger.info(`${taskName} completed in ${elapsedTime}`);
+  });
+  
+  // Done event.
+  // triggered when the pipeline completes executing all the tasks.
+  pipe.on('done', (result) => {
+    // Result of the pipeline.
+  });
+  
   // Can register multiple tasks, each task's output will be input for the next task.
   // Registering tasks can be chained.
   // pipe.register(fn).register(fn).register(fn) ....
