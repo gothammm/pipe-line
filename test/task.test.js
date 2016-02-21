@@ -70,7 +70,7 @@ describe('Task cases', () => {
       return next(response);
     });
     
-    pipe.on('task-complete', (name, elapsed) => {
+    pipe.on('task:complete', (name, elapsed) => {
       console.log(`Task '${name}' took ${elapsed}ms to complete`);
     });
     

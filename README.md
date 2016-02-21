@@ -56,14 +56,14 @@ A task assembler, to divide large tasks into independent and testable small task
   
   // Task start event.
   // Triggers when a task starts.
-  pipe.on('task-start', (taskName) => {
+  pipe.on('task:start', (taskName) => {
     myLogger.info(`${taskName} started...`);
   });
   
   // Task Complete event.
   // Triggers when a particular task finished executing.
   // params -> taskName and ElapsedTime - Time elapsed for the task.
-  pipe.on('task-complete', (taskName, elapsedTime) => {
+  pipe.on('task:complete', (taskName, elapsedTime) => {
     myLogger.info(`${taskName} completed in ${elapsedTime}`);
   });
   
