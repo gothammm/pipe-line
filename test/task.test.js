@@ -13,11 +13,11 @@ describe('Task cases', () => {
   it('should execute a single task', (done) => {
     let pipe = new Pipeline('myPipe');
     
-    let addTwo = (input, next) => next(input + 2);
+    let addTwo = (input, next) => next(null, input + 2);
     
-    let addThree = (input, next) => next(input + 3);
+    let addThree = (input, next) => next(null, input + 3);
     
-    let addTen = (input, next) => next(input + 10);
+    let addTen = (input, next) => next(null, input + 10);
      
     pipe.register(addTwo).register(addThree).register(addTen);
     
@@ -35,9 +35,9 @@ describe('Task cases', () => {
       let githubUserUrl = 'https://api.github.com/users';
       request.get(`${githubUserUrl}/${input}`).end((err, res) => {
         if (err) {
-          throw err;
+          return next(err);
         }
-        return next(res);
+        return next(null, res);
       });
     });
     
@@ -56,18 +56,18 @@ describe('Task cases', () => {
     let githubUserApi = 'https://api.github.com/users';
     let getUser = (input, next) => request.get(`${githubUserApi}/${input}`).end((err, res) => {
       if (err) {
-        throw err;
+        return next(err);
       }
       let response = JSON.parse(res.text);
-      return next(response.login);
+      return next(null, response.login);
     });
     
     let getStarredRepos = (input, next) => request.get(`${githubUserApi}/${input}/starred`).end((err, res) => {
       if (err) {
-        throw err;
+        return next(err);
       }
       let response = JSON.parse(res.text);
-      return next(response);
+      return next(null, response);
     });
     
     pipe.on('task:complete', (name, elapsed) => {
@@ -99,13 +99,13 @@ describe('Task cases', () => {
     pipe.register(function addOne(input, next) {
       let _self = this;
       _self.log('Some message');
-      return next(input + 1);
+      return next(null, input + 1);
     });
     
     pipe.register(function addTwo(input, next) {
       let _self = this;
       _self.log('Some message 2');
-      return next(input + 2);
+      return next(null, input + 2);
     });
     
     pipe.execute(10);

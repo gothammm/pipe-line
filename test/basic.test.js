@@ -22,11 +22,11 @@ describe('Pipeline cases', () => {
     let pipe = new Pipeline('myPipe');
     
     pipe.register((input, next) => {
-      return next(input);
+      return next(null, input);
     });
     
     pipe.register((input, next) => {
-      return next(input);
+      return next(null, input);
     });
     
     expect(pipe.getTasks()).to.have.length(2);
@@ -37,7 +37,7 @@ describe('Pipeline cases', () => {
     let pipe = new Pipeline('myPipe');
     
     pipe.register((input, next) => {
-      return next(input);
+      return next(null, input);
     }, {
       name: 'return value'
     });
