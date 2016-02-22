@@ -28,7 +28,9 @@ A task assembler, to divide large tasks into independent and testable small task
         throw new Error('Something is undefined');
       }
       // Pass value to the next task.
-      return next(10);
+      // First param - error
+      // Second param - value to be passed to the next task
+      return next(null, 10);
     }, 2000);
   });
   
