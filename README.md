@@ -25,7 +25,7 @@ A task assembler, to divide large tasks into independent and testable small task
     // Do something.
     setTimeout(() => {
       if (!something) {
-        throw new Error('Something is undefined');
+        return next(new Error('Something is undefined'));
       }
       // Pass value to the next task.
       // First param - error
