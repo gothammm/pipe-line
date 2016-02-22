@@ -110,4 +110,24 @@ describe('Task cases', () => {
     
     pipe.execute(10);
   });
+  
+  it('should handle errors in nested callbacks', (done) => {
+    
+    let pipe = new Pipeline('myPipe');
+    
+    
+    pipe.register((input, next) => {
+      setTimeout(() => {
+        setTimeout(() => {
+          return next(new Error('somethings wrong'));
+        }, 200);
+      }, 500);
+    });
+    
+    pipe.execute(10).then(done).catch((err) => {
+      expect(err).to.be.instanceOf(Error);
+      expect(err.message).to.equal('somethings wrong');
+      return done();
+    });
+  });
 });
