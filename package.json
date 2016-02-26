@@ -1,6 +1,6 @@
 {
   "name": "pipe-line",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Pipelines to divide large tasks to, sequence of smaller and independent tasks.",
   "main": "index.js",
   "scripts": {
