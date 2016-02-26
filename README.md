@@ -95,7 +95,7 @@ A task assembler, to divide large tasks into independent and testable small task
   
   ```
   
-  ## Using a dispatcher
+## Using a dispatcher
     
   A dispatcher is basically a conditional pipeline runner, Dispatcher takes in array of Pipelines as constructor param,
   and a ```dispatch``` function takes first param as a predicate and second param as the initial input just like ```Pipeline.execute(input)```
