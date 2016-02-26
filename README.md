@@ -25,7 +25,7 @@ A task assembler, to divide large tasks into independent and testable small task
     // Do something.
     setTimeout(() => {
       if (!something) {
-        throw new Error('Something is undefined');
+        return next(new Error('Something is undefined'));
       }
       // Pass value to the next task.
       // First param - error
@@ -36,8 +36,14 @@ A task assembler, to divide large tasks into independent and testable small task
   
   // Use ES5 function, to get a hold of the current task scope.
   // 'this' scope will be unavailable when using ES6 arrow function.
-  pipe.register(function(input, next) {
+  
+  // Actions parameter is an object containing exit & next Function.
+  pipe.register(function(input, next, actions) {
     let _self = this; // Task Scope. 
+    
+    if (someCondition) {
+      return actions.exit(input + 2); // For Graceful pipeline exit.
+    }
     
     _self.log('My Log message', 'and more message'); // Triggers the event 'log'
   });
