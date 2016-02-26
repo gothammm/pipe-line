@@ -15,7 +15,7 @@ A task assembler, to divide large tasks into independent and testable small task
   ```javascript
   
   // Import Pipeline
-  let Pipeline = require('pipe-line');
+  let Pipeline = require('pipe-line').Pipeline;
   
   let pipe = new Pipeline('myPipe', null);
   
@@ -87,4 +87,41 @@ A task assembler, to divide large tasks into independent and testable small task
   pipePromise.then((result) => console.log(result)).catch(console.error);
   
   
+  ```
+  
+  ## Using a dispatcher
+    
+  A dispatcher is basically a conditional pipeline runner, Dispatcher takes in array of Pipelines as constructor param,
+  and a ```dispatch``` function takes first param as a predicate and second param as the initial input just like ```Pipeline.execute(input)```
+     
+  
+  ```javascript
+    // Import dispatcher.
+    const Dispatcher = require('pipe-line').Dispatcher;
+    
+    // Import pipeline
+    const Pipeline = require('pipe-line').Pipeline;
+    
+    // Create pipelines that executes different tasks.
+    let pipeOne = new Pipeline('pipeOne');
+    let pipeTwo = new Pipeline('pipeTwo');
+    
+    // Load the pipelines into the dispatcher in the form of an array.
+    let dispatcher = new Dispatcher([pipeOne, pipeTwo]);
+    
+    
+    // First param - a predicate function that returns the name of a pipeline.
+    // Second param - the initial input value, that needs to be passed onto the selected pipeline.
+    // It also executes the pipeline and returns a promise with the result of the pipeline.
+    // Returns a promise.
+    dispatcher.dispatch(function() {
+      if (someCondition) {
+        return 'pipeOne'; // Pipeline name
+      } else {
+        return 'pipeTwo';
+      } 
+    }, 10).then((result) => {
+      console.log(result);
+    });;
+    
   ```

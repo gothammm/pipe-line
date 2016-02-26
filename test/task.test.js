@@ -4,7 +4,7 @@
 /* global process */
 /* global before */
 'use strict';
-const Pipeline = require('../index');
+const Pipeline = require('../index').Pipeline;
 const request = require('superagent');
 const Chai = require('chai');
 const expect = Chai.expect;

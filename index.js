@@ -1,3 +1,6 @@
 'use strict';
-module.exports = require('./lib/pipe-line');
+module.exports = {
+  Pipeline: require('./lib/pipe-line'),
+  Dispatcher: require('./lib/dispatcher')
+};
 
