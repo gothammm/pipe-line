@@ -182,4 +182,26 @@ describe('Task cases', () => {
       return done();
     }).catch(done);
   });
+  
+  it('should give the max elapsed task details', (done) => {
+    let pipe = new Pipeline('myPipe');
+    
+    pipe.register((input, next) => {
+      return next(null, input + 2); 
+    }, { name: 'task1' });
+    
+    pipe.register((input, next, actions) => {
+      return setTimeout(() => actions.next(null, input + 3), 1000);
+    }, {
+      name: 'task2'
+    });
+    
+    pipe.on('done', (result, maxElapsedTask) => {
+      expect(maxElapsedTask).to.not.be.undefined;
+      expect(maxElapsedTask.name).to.equal('task2');
+      return done();
+    });
+    
+    pipe.execute(10);
+  });
 });
