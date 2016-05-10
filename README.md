@@ -52,8 +52,10 @@ A task assembler, to divide large tasks into independent and testable small task
   
   // Error event.
   // params -> err, and name of the task it failed.
-  pipe.on('error', (err, taskName) => {
+  pipe.on('error', (err, taskDetails) => {
     // Handle stuff
+    // taskDetails.currentTask - name of the task, where the error occurred.
+    // taskDetails.input - the input details that the task received
   });
   
   // Log event.
